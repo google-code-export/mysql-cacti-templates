@@ -449,4 +449,76 @@ is(
    'main(samples/mongodb-001.txt)'
 );
 
+is_deeply(
+   df_parse( array('volume' => '/dev/vzfs'), file_get_contents('samples/df-001.txt') ),
+   array(
+      'DF_used'      => '4596444160',
+      'DF_available' => '26860835840',
+   ),
+   'samples/df-001.txt'
+);
+
+is(
+   ss_get_by_ssh( array(
+      'file'    => 'samples/df-001.txt',
+      'type'    => 'df',
+      'host'    => 'localhost',
+      'items'   => 'dw,dx',
+      'volume'  => '/dev/vzfs',
+   )),
+   'dw:4596444160 dx:26860835840',
+   'main(samples/df-001.txt)'
+);
+
+is_deeply(
+   df_parse( array('volume' => '/dev/sda1'), file_get_contents('samples/df-002.txt') ),
+   array(
+      'DF_used'      => '48369664',
+      'DF_available' => '177678336',
+   ),
+   'samples/df-002.txt'
+);
+
+is(
+   ss_get_by_ssh( array(
+      'file'    => 'samples/df-002.txt',
+      'type'    => 'df',
+      'host'    => 'localhost',
+      'items'   => 'dw,dx',
+      'volume'  => '/dev/sda1',
+   )),
+   'dw:48369664 dx:177678336',
+   'main(samples/df-002.txt)'
+);
+
+is_deeply(
+   netdev_parse( array('device' => 'eth0'), file_get_contents('samples/netdev-001.txt') ),
+   array(
+        'NETDEV_rxbytes'   => '99704481',
+        'NETDEV_rxerrs'    => '0',
+        'NETDEV_rxdrop'    => '0',
+        'NETDEV_rxfifo'    => '0',
+        'NETDEV_rxframe'   => '0',
+        'NETDEV_txbytes'   => '21749178',
+        'NETDEV_txerrs'    => '0',
+        'NETDEV_txdrop'    => '0',
+        'NETDEV_txfifo'    => '0',
+        'NETDEV_txcolls'   => '0',
+        'NETDEV_txcarrier' => '0',
+   ),
+   'samples/netdev-001.txt'
+);
+
+is(
+   ss_get_by_ssh( array(
+      'file'    => 'samples/netdev-001.txt',
+      'type'    => 'netdev',
+      'host'    => 'localhost',
+      'items'   => 'dy,dz,e0,e1,e2,e3,e4,e5,e6,e7,e8',
+      'device'  => 'eth0',
+   )),
+   'dy:99704481 dz:0 e0:0 e1:0 e2:0 e3:21749178 e4:0 e5:0 e6:0 e7:0 e8:0',
+   'main(samples/netdev-001.txt)'
+);
+
 ?>

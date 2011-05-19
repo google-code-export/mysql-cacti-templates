@@ -1,6 +1,8 @@
 Changes for templates:
 
   * Added checksums to templates (issue 176).
+  * Added Disk Space (df) graph (issue 96).
+  * Added Network graphs (issue 100).
 
 2011-01-22: version 1.1.8
 

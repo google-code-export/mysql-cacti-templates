@@ -164,7 +164,8 @@ function extract_desired ( $options, $text ) {
 function validate_options($options) {
    debug($options);
    $opts = array('host', 'port', 'items', 'nocache', 'type', 'url', 'http-user',
-                 'file', 'http-password', 'server', 'port2', 'use-ssh', 'device');
+                 'file', 'http-password', 'server', 'port2', 'use-ssh', 
+                 'device', 'volume');
    # Required command-line options
    foreach ( array('host', 'items', 'type') as $option ) {
       if ( !isset($options[$option]) || !$options[$option] ) {
@@ -192,7 +193,7 @@ option without a value after it, the option is ignored.  For options such as
 
 General options:
 
-   --device          The device name for diskstats
+   --device          The device name for diskstats and netdev
    --file            Get input from this file instead of via SSH command
    --host            Hostname to connect to (via SSH)
    --items           Comma-separated list of the items whose data you want
@@ -204,12 +205,14 @@ General options:
                      desired data after SSHing.  Default is 'localhost' for HTTP
                      stats and --host for memcached stats.
    --type            One of apache, nginx, proc_stat, w, memory, memcached,
-                     diskstats, openvz, redis, jmx, mongodb (more are TODO)
+                     diskstats, openvz, redis, jmx, mongodb, df, netdev
+                     (more are TODO)
    --url             The url, such as /server-status, where server status lives
    --use-ssh         Whether to connect via SSH to gather info (default yes).
    --http-user       The HTTP authentication user
    --http-password   The HTTP authentication password
    --openvz_cmd      The command to use when fetching OpenVZ statistics
+   --volume          The volume name for df
 
 EOF;
    die($usage);
@@ -447,6 +450,19 @@ function ss_get_by_ssh( $options ) {
       'MONGODB_op_commands'              => 'dt',
       'MONGODB_slave_lag'                => 'du',
       # used by STAT_memtotal            => 'dv',
+      'DF_used'                          => 'dw',
+      'DF_available'                     => 'dx',
+      'NETDEV_rxbytes'                   => 'dy',
+      'NETDEV_rxerrs'                    => 'dz',
+      'NETDEV_rxdrop'                    => 'e0',
+      'NETDEV_rxfifo'                    => 'e1',
+      'NETDEV_rxframe'                   => 'e2',
+      'NETDEV_txbytes'                   => 'e3',
+      'NETDEV_txerrs'                    => 'e4',
+      'NETDEV_txdrop'                    => 'e5',
+      'NETDEV_txfifo'                    => 'e6',
+      'NETDEV_txcolls'                   => 'e7',
+      'NETDEV_txcarrier'                 => 'e8',
    );
 
    # Prepare and return the output.  The output we have right now is the whole
@@ -1315,6 +1331,73 @@ function mongodb_parse ( $options, $output ) {
    }
 
    return $result;
+}
+
+function df_parse ( $options, $output ) {
+   if ( !isset($options['volume']) ) {
+      die("--volume is required for --type df");
+   }
+   foreach ( explode("\n", $output) as $line ) {
+      if ( preg_match_all('/\S+/', $line, $words) ) {
+         $words = $words[0];
+         if ( count($words) > 0 && $words[0] === $options['volume'] ) {
+            if ( count($words) > 3 ) {
+               return array(
+                  'DF_used'      => $words[2]*1024,
+                  'DF_available' => $words[3]*1024,
+               );
+            }
+         }
+      }
+   }
+   debug("Looks like we did not find $options[volume] in the output");
+   return array();
+}
+
+function df_cachefile ( $options ) {
+   return sanitize_filename($options, array('host', 'volume'), 'df');
+}
+
+function df_cmdline ( $options ) {
+   return "df -k";
+}
+
+function netdev_parse ( $options, $output ) {
+   if ( !isset($options['device']) ) {
+      die("--device is required for --type netdev");
+   }
+   foreach ( explode("\n", $output) as $line ) {
+      if ( preg_match_all('/[^\s:]+/', $line, $words) ) {
+         $words = $words[0];
+         if ( count($words) > 0 && $words[0] === $options['device'] ) {
+            if ( count($words) > 15 ) {
+                return array(
+                    'NETDEV_rxbytes'   => $words[1],
+                    'NETDEV_rxerrs'    => $words[3],
+                    'NETDEV_rxdrop'    => $words[4],
+                    'NETDEV_rxfifo'    => $words[5],
+                    'NETDEV_rxframe'   => $words[6],
+                    'NETDEV_txbytes'   => $words[9],
+                    'NETDEV_txerrs'    => $words[11],
+                    'NETDEV_txdrop'    => $words[12],
+                    'NETDEV_txfifo'    => $words[13],
+                    'NETDEV_txcolls'   => $words[14],
+                    'NETDEV_txcarrier' => $words[15],
+                );
+            }
+         }
+      }
+   }
+   debug("Looks like we did not find $options[device] in the output");
+   return array();
+}
+
+function netdev_cachefile ( $options ) {
+   return sanitize_filename($options, array('host', 'device'), 'netdev');
+}
+
+function netdev_cmdline ( $options ) {
+   return "cat /proc/net/dev";
 }
 
 ?>

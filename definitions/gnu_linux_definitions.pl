@@ -592,6 +592,244 @@
             },
          ],
       },
+      {  name       => 'Disk Space',
+         base_value => '1024',
+         hash       => 'hash_00_VER_67c7da01b83880d961cb058d093ab07c',
+         override   => { title => 1 },
+         dt         => {
+            hash       => 'hash_01_VER_5883cafbab3b5c5384e6ba731402c23c',
+            input      => 'Get Disk Space',
+            DF_used => {
+               data_source_type_id => '1',
+               hash => 'hash_08_VER_933e7ffc5127eb5859b8f666a9c93f61',
+            },
+            DF_available => {
+               data_source_type_id => '1',
+               hash => 'hash_08_VER_71fe532aeadda211ec1bfbcbd6d88866',
+            },
+         },
+         items => [
+            {  item   => 'DF_used',
+               color  => '0E4E5A',
+               task   => 'hash_09_VER_336248a83b61c2a6086dc4d40f8d0fe5',
+               type   => 'AREA',
+               hashes => [
+                  'hash_10_VER_2b84db77e0cdbf598637b79de413a2e8',
+                  'hash_10_VER_30ea6eb7f63000177c03bbb15fc82c08',
+                  'hash_10_VER_88cbd4f41a9ca15cb5fe6cdd677ba711',
+                  'hash_10_VER_782d95501b04ff183dc98192108b700b'
+               ],
+            },
+            {  item   => 'DF_available',
+               color  => '62BECB',
+               task   => 'hash_09_VER_8dce29761a65fb14d3cf592a9d325061',
+               type   => 'STACK',
+               hashes => [
+                  'hash_10_VER_27d6ce5d0ab4bb00e2c9f55033b02c4b',
+                  'hash_10_VER_3c50906daf81b47c4094b6427ba2c3ed',
+                  'hash_10_VER_c1c0ec45b38c27287b7963b7314b3d81',
+                  'hash_10_VER_bacb609ed93fec099673557dad74a682'
+               ],
+            },
+         ],
+      },
+      {  name       => 'Network Traffic',
+         base_value => '1024',
+         hash       => 'hash_00_VER_3cc615b236a8758094273fb0bbf18433',
+         override   => { title => 1 },
+         dt         => {
+            hash       => 'hash_01_VER_8237da6d0f98a2db7fb15b2dafd2a8d7',
+            input      => 'Get Network Traffic',
+            NETDEV_rxbytes => {
+               data_source_type_id => '3',
+               hash => 'hash_08_VER_c48229d20fd07a2ca5d1fa18ccb34196',
+            },
+            NETDEV_txbytes => {
+               data_source_type_id => '3',
+               hash => 'hash_08_VER_bf53718d522e3d600fdaa9719c3bccc5',
+            },
+         },
+         items => [
+            # Colors from
+            # http://www.colourlovers.com/palette/444487/Curiosity_Killed
+            {  item   => 'NETDEV_rxbytes',
+               color  => '555152',
+               task   => 'hash_09_VER_9f8562296bfe69c4c063aab2870c6aaf',
+               type   => 'AREA',
+               hashes => [
+                  'hash_10_VER_46876cfa28cf4ab401be4221d8575a1c',
+                  'hash_10_VER_40df6758068b8024921a087cd5f93778',
+                  'hash_10_VER_443954e15e6a999198df1f3f81049806',
+                  'hash_10_VER_aa1dc175db09eb9b7195cf5f864be7fc'
+               ],
+            },
+            {  item   => 'NETDEV_txbytes',
+               color  => '2E2633',
+               task   => 'hash_09_VER_23ab1796bdd2497c377b511f2a9eaca6',
+               type   => 'AREA',
+               cdef   => 'Negate',
+               hashes => [
+                  'hash_10_VER_e5e7296f4a2da4d1cdccd5deb9503476',
+                  'hash_10_VER_28fae4ddfdb07be59cb5e51bea3ca59a',
+                  'hash_10_VER_1874eb939c3902ce5fe31b7e0a41e83f',
+                  'hash_10_VER_e92bebafc1d4de4c1450dde5b7eb2882'
+               ],
+            },
+         ],
+      },
+      {  name       => 'Network Errors',
+         base_value => '1000',
+         hash       => 'hash_00_VER_b714fc0f8f74c84efc8cfe685720d169',
+         override   => { title => 1 },
+         dt         => {
+            hash       => 'hash_01_VER_d0ba36a9436ae16408b8e30de01e33c0',
+            input      => 'Get Network Errors',
+            NETDEV_rxerrs => {
+               data_source_type_id => '3',
+               hash => 'hash_08_VER_f223c06219126eebc78f64f11038ebbe',
+            },
+            NETDEV_rxdrop => {
+               data_source_type_id => '3',
+               hash => 'hash_08_VER_8b5e9e3a3502feafd0519309a9027a9f',
+            },
+            NETDEV_rxfifo => {
+               data_source_type_id => '3',
+               hash => 'hash_08_VER_6815071e3fd12b619456bde8ab0e56f0',
+            },
+            NETDEV_rxframe => {
+               data_source_type_id => '3',
+               hash => 'hash_08_VER_f3cafa46f4a3157776594493ba7643ba',
+            },
+            NETDEV_txerrs => {
+               data_source_type_id => '3',
+               hash => 'hash_08_VER_ec4f14bc371161b12aa5e908d827cd08',
+            },
+            NETDEV_txdrop => {
+               data_source_type_id => '3',
+               hash => 'hash_08_VER_614f9f6b2e929e80efafec8322e4e7e8',
+            },
+            NETDEV_txfifo => {
+               data_source_type_id => '3',
+               hash => 'hash_08_VER_f43a4e8a6f7ca44ff6de027b86df118e',
+            },
+            NETDEV_txcolls => {
+               data_source_type_id => '3',
+               hash => 'hash_08_VER_b70b5b9561e424bd90dd51d262e6d0c4',
+            },
+            NETDEV_txcarrier => {
+               data_source_type_id => '3',
+               hash => 'hash_08_VER_e26691d42f44209b131d0fde9bf73ffd',
+            },
+         },
+         items => [
+            # Colors from
+            # http://www.colourlovers.com/palette/444487/Curiosity_Killed
+            {  item   => 'NETDEV_rxerrs',
+               color  => '6A4A3C',
+               task   => 'hash_09_VER_32aa3e9865b91e77803a2f6066be808d',
+               type   => 'LINE1',
+               hashes => [
+                  'hash_10_VER_768bf3ab022c8f6a29cd40858246fea5',
+                  'hash_10_VER_03635e3c0042e645dbb300c31e26ce61',
+                  'hash_10_VER_b9a67a48a9ce586708680ab669e6dd80',
+                  'hash_10_VER_4c2c107ce71557ac214aca7943417246'
+               ],
+            },
+            {  item   => 'NETDEV_rxdrop',
+               color  => 'CC333F',
+               task   => 'hash_09_VER_9790eeb0be2b1603a56988920dbee3d7',
+               type   => 'LINE1',
+               hashes => [
+                  'hash_10_VER_db0e41c7a8e4b9a2b9315bd3d1240760',
+                  'hash_10_VER_61ffffb61e866e9c11a207556539e2b6',
+                  'hash_10_VER_32f2568a3c7b451250a5548096dd2027',
+                  'hash_10_VER_4bfcb739da1170fe5193e9da5027596a'
+               ],
+            },
+            {  item   => 'NETDEV_rxfifo',
+               color  => 'EB6841',
+               task   => 'hash_09_VER_8495f51ffbaa9b56624da0c827c096c3',
+               type   => 'LINE1',
+               hashes => [
+                  'hash_10_VER_316a1bd8c3043dca7ac2061db909b1ae',
+                  'hash_10_VER_a99f038a7b314f9ad7c34e6b59d68649',
+                  'hash_10_VER_f7c28b04c7ab9fdb8aff7e5db3bd7af0',
+                  'hash_10_VER_1bce439a27ff29fa262152aee079c97f'
+               ],
+            },
+            {  item   => 'NETDEV_rxframe',
+               color  => 'EDC951',
+               task   => 'hash_09_VER_426646b7d72af0c6be09b86d7a57cb4f',
+               type   => 'LINE1',
+               hashes => [
+                  'hash_10_VER_c385f1f53f77444cae3504736b1e6c80',
+                  'hash_10_VER_f200ff353cf29918bf894380713bd6d5',
+                  'hash_10_VER_03abbdf7161ed854894e51887aafb0b0',
+                  'hash_10_VER_359c7e0df9666c2f0eed42126a37fb26'
+               ],
+            },
+            {  item   => 'NETDEV_txerrs',
+               color  => '6A4A3C',
+               task   => 'hash_09_VER_816288958fde796c576fdee9260f9386',
+               type   => 'LINE1',
+               cdef   => 'Negate',
+               hashes => [
+                  'hash_10_VER_cfa65d9bb7823aba733994a594f55b2a',
+                  'hash_10_VER_e0db29d04e99b772294a943fc0137498',
+                  'hash_10_VER_58c0ccc6fe7f19c5a07b823db9cd3370',
+                  'hash_10_VER_04c31ebad371d30b0a405dcb8316ce41'
+               ],
+            },
+            {  item   => 'NETDEV_txdrop',
+               color  => 'CC333F',
+               task   => 'hash_09_VER_f08cabf97918dce83044e4cf19fd14ab',
+               type   => 'LINE1',
+               cdef   => 'Negate',
+               hashes => [
+                  'hash_10_VER_091a03307673b68753455bf5107322a1',
+                  'hash_10_VER_e0189cf824ffe5d9a22357f29a091196',
+                  'hash_10_VER_ecfb7410220e6b4e312e0b17fe87fea3',
+                  'hash_10_VER_bfd4de0f542b772373fb3a1622f23a5a'
+               ],
+            },
+            {  item   => 'NETDEV_txfifo',
+               color  => 'EB6841',
+               task   => 'hash_09_VER_73c953122ba5d2e2c31d939c7d0fcbd3',
+               type   => 'LINE1',
+               cdef   => 'Negate',
+               hashes => [
+                  'hash_10_VER_effb04eabcd35fcd42a6a2c666b34727',
+                  'hash_10_VER_847ebd68233c59d83c5c1ee93c89e47a',
+                  'hash_10_VER_13d15f0c1364bb2ec8362ac6756cc89e',
+                  'hash_10_VER_2dcc67489303fcb7f806851ac0048fb0'
+               ],
+            },
+            {  item   => 'NETDEV_txcolls',
+               color  => '00A0B0',
+               task   => 'hash_09_VER_c7d14dc35942243ecf1df8bbf66f58c5',
+               type   => 'LINE1',
+               cdef   => 'Negate',
+               hashes => [
+                  'hash_10_VER_dcd6f73475920940f6c9a13c7e712947',
+                  'hash_10_VER_128ea91f743187b6b479fc93a8c4c0c5',
+                  'hash_10_VER_8bc27fec2444392f9c1518bc848a2415',
+                  'hash_10_VER_0a78c8755a80d249f9eecfbc1c9e6284'
+               ],
+            },
+            {  item   => 'NETDEV_txcarrier',
+               color  => '4AC3B2',
+               task   => 'hash_09_VER_b57713c5945db65e965436f95ba5eb32',
+               type   => 'LINE1',
+               cdef   => 'Negate',
+               hashes => [
+                  'hash_10_VER_fe544b551d5c1c38fc25a05c11b24ed3',
+                  'hash_10_VER_f615cfd696d05f28ad1457192b7e4628',
+                  'hash_10_VER_e83d4da17336fb799c37c48cad5d0e0b',
+                  'hash_10_VER_2f825ffd459291d716439c7bc093122c'
+               ],
+            },
+         ],
+      },
    ],
    inputs => {
       'Get W' => {
@@ -685,6 +923,82 @@
             STAT_memshared => 'hash_07_VER_fac0993a72e5873c61ad51c864e23a3f',
             STAT_memfree   => 'hash_07_VER_23347c2c0ca8abf1b054324106a4b5b6',
             STAT_memtotal  => 'hash_07_VER_a2ae90873473fc4b43f23734219f3620',
+         },
+      },
+      'Get Disk Space' => {
+         type_id      => 1,
+         hash         => 'hash_03_VER_54fca3916e5ca2840a04249f9c92a4e8',
+         input_string => '<path_php_binary> -q <path_cacti>/scripts/ss_get_by_ssh.php '
+                       . '--host <hostname> --type df --items <items> '
+                       . '--volume <volume>',
+         prompt_title => 1,
+         inputs => [
+            {  allow_nulls => '',
+               hash        => 'hash_07_VER_94a043ceb55298e59342f166c810501e',
+               name        => 'hostname'
+            },
+            {  allow_nulls => '',
+               hash        => 'hash_07_VER_f8de536aad2eee47d36993c63d70a00b',
+               name        => 'volume',
+               override    => 1,
+            },
+         ],
+         outputs => {
+            DF_used      => 'hash_07_VER_482cb09b2a715ed91d11ad8d695b7daf',
+            DF_available => 'hash_07_VER_39408ddb6346f338f509d47013e16229',
+         },
+      },
+      'Get Network Traffic' => {
+         type_id      => 1,
+         hash         => 'hash_03_VER_583c08052901b9b724183cb97227b445',
+         input_string => '<path_php_binary> -q <path_cacti>/scripts/ss_get_by_ssh.php '
+                       . '--host <hostname> --type netdev --items <items> '
+                       . '--device <device>',
+         prompt_title => 1,
+         inputs => [
+            {  allow_nulls => '',
+               hash        => 'hash_07_VER_0af3110114d31e3b80bc6e3a42237ae4',
+               name        => 'hostname'
+            },
+            {  allow_nulls => '',
+               hash        => 'hash_07_VER_4f0e4a0a97c0a2e9242be23fac72baed',
+               name        => 'device',
+               override    => 1,
+            },
+         ],
+         outputs => {
+            NETDEV_rxbytes => 'hash_07_VER_396562c60afe89dd882534807c54f8d2',
+            NETDEV_txbytes => 'hash_07_VER_e322a3dfd7f4db3b0190defc26caa350',
+         },
+      },
+      'Get Network Errors' => {
+         type_id      => 1,
+         hash         => 'hash_03_VER_1a5f07d0102b12f5443fa899312cd669',
+         input_string => '<path_php_binary> -q <path_cacti>/scripts/ss_get_by_ssh.php '
+                       . '--host <hostname> --type netdev --items <items> '
+                       . '--device <device>',
+         prompt_title => 1,
+         inputs => [
+            {  allow_nulls => '',
+               hash        => 'hash_07_VER_0c9179a50a17c84d4245c1fdc51e931e',
+               name        => 'hostname'
+            },
+            {  allow_nulls => '',
+               hash        => 'hash_07_VER_0844e60713209f6b36b9e5040fe7a067',
+               name        => 'device',
+               override    => 1,
+            },
+         ],
+         outputs => {
+            NETDEV_rxerrs    => 'hash_07_VER_0d81858cc37f82901bb91518aae52204',
+            NETDEV_rxdrop    => 'hash_07_VER_78435947301184672d57360a0542fdb4',
+            NETDEV_rxfifo    => 'hash_07_VER_b72c415307ec3117b0880f07fe8e17e6',
+            NETDEV_rxframe   => 'hash_07_VER_c78ffeec10a8e63b6c34d7ed608eca3c',
+            NETDEV_txerrs    => 'hash_07_VER_00283b13dbdb898698b2177750db6de3',
+            NETDEV_txdrop    => 'hash_07_VER_d8d93c6191918a7d48a9403bba7baa40',
+            NETDEV_txfifo    => 'hash_07_VER_aa6cc86c6faf544e3626399429b9e151',
+            NETDEV_txcolls   => 'hash_07_VER_1618e6d4a45b466f6db539e26ee26a7c',
+            NETDEV_txcarrier => 'hash_07_VER_da5563ac95c3ef33bfc0c8227ab40559',
          },
       },
    },

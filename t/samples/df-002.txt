@@ -1,0 +1,11 @@
+Filesystem           1K-blocks      Used Available Use% Mounted on
+/dev/mapper/iceland-root
+                      73506040  56766408  13005720  82% /
+none                   1016572       328   1016244   1% /dev
+none                   1024308      1388   1022920   1% /dev/shm
+none                   1024308       116   1024192   1% /var/run
+none                   1024308         0   1024308   0% /var/lock
+none                   1024308         0   1024308   0% /lib/init/rw
+/dev/sda1               233191     47236    173514  22% /boot
+nfs:/data/public
+                     5768579424 3290167680 2185384736  61% /data/public
