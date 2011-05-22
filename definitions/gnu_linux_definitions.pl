@@ -599,17 +599,17 @@
          dt         => {
             hash       => 'hash_01_VER_5883cafbab3b5c5384e6ba731402c23c',
             input      => 'Get Disk Space',
-            DF_used => {
+            DISKFREE_used => {
                data_source_type_id => '1',
                hash => 'hash_08_VER_933e7ffc5127eb5859b8f666a9c93f61',
             },
-            DF_available => {
+            DISKFREE_available => {
                data_source_type_id => '1',
                hash => 'hash_08_VER_71fe532aeadda211ec1bfbcbd6d88866',
             },
          },
          items => [
-            {  item   => 'DF_used',
+            {  item   => 'DISKFREE_used',
                color  => '0E4E5A',
                task   => 'hash_09_VER_336248a83b61c2a6086dc4d40f8d0fe5',
                type   => 'AREA',
@@ -620,7 +620,7 @@
                   'hash_10_VER_782d95501b04ff183dc98192108b700b'
                ],
             },
-            {  item   => 'DF_available',
+            {  item   => 'DISKFREE_available',
                color  => '62BECB',
                task   => 'hash_09_VER_8dce29761a65fb14d3cf592a9d325061',
                type   => 'STACK',
@@ -944,8 +944,8 @@
             },
          ],
          outputs => {
-            DF_used      => 'hash_07_VER_482cb09b2a715ed91d11ad8d695b7daf',
-            DF_available => 'hash_07_VER_39408ddb6346f338f509d47013e16229',
+            DISKFREE_used      => 'hash_07_VER_482cb09b2a715ed91d11ad8d695b7daf',
+            DISKFREE_available => 'hash_07_VER_39408ddb6346f338f509d47013e16229',
          },
       },
       'Get Network Traffic' => {

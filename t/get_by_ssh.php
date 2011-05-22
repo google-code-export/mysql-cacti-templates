@@ -452,8 +452,8 @@ is(
 is_deeply(
    df_parse( array('volume' => '/dev/vzfs'), file_get_contents('samples/df-001.txt') ),
    array(
-      'DF_used'      => '4596444160',
-      'DF_available' => '26860835840',
+      'DISKFREE_used'      => '4596444160',
+      'DISKFREE_available' => '26860835840',
    ),
    'samples/df-001.txt'
 );
@@ -473,8 +473,8 @@ is(
 is_deeply(
    df_parse( array('volume' => '/dev/sda1'), file_get_contents('samples/df-002.txt') ),
    array(
-      'DF_used'      => '48369664',
-      'DF_available' => '177678336',
+      'DISKFREE_used'      => '48369664',
+      'DISKFREE_available' => '177678336',
    ),
    'samples/df-002.txt'
 );

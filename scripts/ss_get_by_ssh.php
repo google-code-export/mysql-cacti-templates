@@ -450,8 +450,8 @@ function ss_get_by_ssh( $options ) {
       'MONGODB_op_commands'              => 'dt',
       'MONGODB_slave_lag'                => 'du',
       # used by STAT_memtotal            => 'dv',
-      'DF_used'                          => 'dw',
-      'DF_available'                     => 'dx',
+      'DISKFREE_used'                    => 'dw',
+      'DISKFREE_available'               => 'dx',
       'NETDEV_rxbytes'                   => 'dy',
       'NETDEV_rxerrs'                    => 'dz',
       'NETDEV_rxdrop'                    => 'e0',
@@ -1343,8 +1343,8 @@ function df_parse ( $options, $output ) {
          if ( count($words) > 0 && $words[0] === $options['volume'] ) {
             if ( count($words) > 3 ) {
                return array(
-                  'DF_used'      => $words[2]*1024,
-                  'DF_available' => $words[3]*1024,
+                  'DISKFREE_used'      => $words[2]*1024,
+                  'DISKFREE_available' => $words[3]*1024,
                );
             }
          }
