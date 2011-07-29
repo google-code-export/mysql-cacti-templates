@@ -205,7 +205,7 @@ General options:
                      desired data after SSHing.  Default is 'localhost' for HTTP
                      stats and --host for memcached stats.
    --type            One of apache, nginx, proc_stat, w, memory, memcached,
-                     diskstats, openvz, redis, jmx, mongodb, df, netdev
+                     diskstats, openvz, redis, jmx, mongodb, df, netdev, netstat
                      (more are TODO)
    --url             The url, such as /server-status, where server status lives
    --use-ssh         Whether to connect via SSH to gather info (default yes).
@@ -450,8 +450,10 @@ function ss_get_by_ssh( $options ) {
       'MONGODB_op_commands'              => 'dt',
       'MONGODB_slave_lag'                => 'du',
       # used by STAT_memtotal            => 'dv',
+      # Stuff from 'df'
       'DISKFREE_used'                    => 'dw',
       'DISKFREE_available'               => 'dx',
+      # Stuff from '/proc/net/dev'
       'NETDEV_rxbytes'                   => 'dy',
       'NETDEV_rxerrs'                    => 'dz',
       'NETDEV_rxdrop'                    => 'e0',
@@ -463,6 +465,19 @@ function ss_get_by_ssh( $options ) {
       'NETDEV_txfifo'                    => 'e6',
       'NETDEV_txcolls'                   => 'e7',
       'NETDEV_txcarrier'                 => 'e8',
+      # Stuff from 'netstat'
+      'NETSTAT_established'              => 'e9',
+      'NETSTAT_syn_sent'                 => 'ea',
+      'NETSTAT_syn_recv'                 => 'eb',
+      'NETSTAT_fin_wait1'                => 'ec',
+      'NETSTAT_fin_wait2'                => 'ed',
+      'NETSTAT_time_wait'                => 'ee',
+      'NETSTAT_close'                    => 'ef',
+      'NETSTAT_close_wait'               => 'eg',
+      'NETSTAT_last_ack'                 => 'eh',
+      'NETSTAT_listen'                   => 'ei',
+      'NETSTAT_closing'                  => 'ej',
+      'NETSTAT_unknown'                  => 'ek',
    );
 
    # Prepare and return the output.  The output we have right now is the whole
@@ -1398,6 +1413,38 @@ function netdev_cachefile ( $options ) {
 
 function netdev_cmdline ( $options ) {
    return "cat /proc/net/dev";
+}
+
+function netstat_parse ( $options, $output ) {
+    $array = array(
+        'NETSTAT_established' => 0,
+        'NETSTAT_syn_sent'    => 0,
+        'NETSTAT_syn_recv'    => 0,
+        'NETSTAT_fin_wait1'   => 0,
+        'NETSTAT_fin_wait2'   => 0,
+        'NETSTAT_time_wait'   => 0,
+        'NETSTAT_close'       => 0,
+        'NETSTAT_close_wait'  => 0,
+        'NETSTAT_last_ack'    => 0,
+        'NETSTAT_listen'      => 0,
+        'NETSTAT_closing'     => 0,
+        'NETSTAT_unknown'     => 0,
+    );
+
+    foreach(explode("\n", $output) as $line) {
+        if(preg_match('/^tcp/', $line)){
+            $array['NETSTAT_'.strtolower(end(preg_split('/[\s]+/', trim($line))))]++;
+        }
+    }
+    return $array;
+}
+
+function netstat_cachefile ( $options ) {
+   return sanitize_filename($options, array('host'), 'netstat');
+}
+
+function netstat_cmdline ( $options ) {
+   return "netstat -ant";
 }
 
 ?>

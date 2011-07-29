@@ -830,6 +830,199 @@
             },
          ],
       },
+      {  name       => 'Network Connection States',
+         base_value => '1000',
+         hash       => 'hash_00_VER_1c018cbe5e49990a9536e40b1040da40',
+         override   => { title => 1 },
+         dt         => {
+            hash       => 'hash_01_VER_d7cd915734bb8ccfd0aec7a03ac5479c',
+            input      => 'Get Network Connection States',
+            NETSTAT_established => {
+               data_source_type_id => '1',
+               hash => 'hash_08_VER_37ca6fdf4e9d52f3110815722cdfeda8',
+            },
+            NETSTAT_syn_sent => {
+               data_source_type_id => '1',
+               hash => 'hash_08_VER_32a0cf19076724628dcc935b83f3e509',
+            },
+            NETSTAT_syn_recv => {
+               data_source_type_id => '1',
+               hash => 'hash_08_VER_9115f581e93f9242ba024cbc610fde6e',
+            },
+            NETSTAT_fin_wait1 => {
+               data_source_type_id => '1',
+               hash => 'hash_08_VER_a186a5813f5e4cc90a13a1b2b8dc06a3',
+            },
+            NETSTAT_fin_wait2 => {
+               data_source_type_id => '1',
+               hash => 'hash_08_VER_f7aaa5de4798fb3fee136c6239bfa771',
+            },
+            NETSTAT_time_wait => {
+               data_source_type_id => '1',
+               hash => 'hash_08_VER_346a5a79b57a2e2e07ea64bb9fd2ba6f',
+            },
+            NETSTAT_close => {
+               data_source_type_id => '1',
+               hash => 'hash_08_VER_0f31bf5f876221bb685f1b221124ea2f',
+            },
+            NETSTAT_close_wait => {
+               data_source_type_id => '1',
+               hash => 'hash_08_VER_f47a726aee8775f95c97ece42ccfafb7',
+            },
+            NETSTAT_last_ack => {
+               data_source_type_id => '1',
+               hash => 'hash_08_VER_36861b41cfe21688fdeb020f8536d494',
+            },
+            NETSTAT_listen => {
+               data_source_type_id => '1',
+               hash => 'hash_08_VER_f1066c3372b01ff223729179f6b6da07',
+            },
+            NETSTAT_closing => {
+               data_source_type_id => '1',
+               hash => 'hash_08_VER_7cb36839ade51a7b0f37d881f143dcb2',
+            },
+            NETSTAT_unknown => {
+               data_source_type_id => '1',
+               hash => 'hash_08_VER_ca03907a398fcddb0de2d4d49ea30ba5',
+            },
+         },
+         items => [
+            # Colors from
+            # http://www.colourlovers.com/palette/444487/Curiosity_Killed
+            {  item   => 'NETSTAT_established',
+               color  => '8C2318',
+               task   => 'hash_09_VER_f6f5936fac342503be3796badcf47640',
+               type   => 'AREA',
+               hashes => [
+                  'hash_10_VER_6a0f0993febff5d59fc40f85cbc2b8ae',
+                  'hash_10_VER_9047c0f46ea119f348cbea7d0d2c02ef',
+                  'hash_10_VER_d9e5f6a04bc9ef9fa93886ef8bf0c695',
+                  'hash_10_VER_6671682f15c5ea85033bdce07d149c3d'
+               ],
+            },
+            {  item   => 'NETSTAT_syn_sent',
+               color  => '5E8C6A',
+               task   => 'hash_09_VER_bbaee184a6ea903606c09cfd75a83719',
+               type   => 'STACK',
+               hashes => [
+                  'hash_10_VER_80ae25ced3959e4af5b7ecc33b841be8',
+                  'hash_10_VER_93febdcb138a0b143395f33c8b6a833d',
+                  'hash_10_VER_34ac840c1859e0dab549284cd38efb6b',
+                  'hash_10_VER_c1edadc16d54c68999fb7413d74d3ba5'
+               ],
+            },
+            {  item   => 'NETSTAT_syn_recv',
+               color  => '88A65E',
+               task   => 'hash_09_VER_7b75748e4e2eee5fa9223be38797b383',
+               type   => 'STACK',
+               hashes => [
+                  'hash_10_VER_6f751c9cd7843ec8e18ed9d9742e52b0',
+                  'hash_10_VER_38429f400932153900591f14896db40c',
+                  'hash_10_VER_f3632881f839f6073e9077418f06d268',
+                  'hash_10_VER_c82b8fa045224be8dbfd1e8e8c53fada'
+               ],
+            },
+            {  item   => 'NETSTAT_fin_wait1',
+               color  => 'BFB35A',
+               task   => 'hash_09_VER_0c1bcff273fab49e7172bb1ad65ff0fc',
+               type   => 'STACK',
+               hashes => [
+                  'hash_10_VER_7d9f0649452bc8b8ba997eef0efc599f',
+                  'hash_10_VER_43d61854ab12ae7c9a7e0561fedb5a06',
+                  'hash_10_VER_3f32568f97b476ced718ad95acb49631',
+                  'hash_10_VER_e03231fdd2b8c107fafb1a75921187d7'
+               ],
+            },
+            {  item   => 'NETSTAT_fin_wait2',
+               color  => 'F2C45A',
+               task   => 'hash_09_VER_b73c6faf4510b26af0939dfddc03dc5a',
+               type   => 'STACK',
+               hashes => [
+                  'hash_10_VER_8a9a54da01bafabf90851458c5c53a1e',
+                  'hash_10_VER_b6c24593685dd5205a6bbc7a6930f739',
+                  'hash_10_VER_e537333cbbaca83f5eeeec6537d17e93',
+                  'hash_10_VER_f1afc5fd7b1be128baf133bc55532c4b'
+               ],
+            },
+            {  item   => 'NETSTAT_time_wait',
+               color  => 'EB6841',
+               task   => 'hash_09_VER_5bb8b2913ad4961c501f79b0f810ee9a',
+               type   => 'STACK',
+               hashes => [
+                  'hash_10_VER_5b64dbc648b88e22a47a17ce9ccf2834',
+                  'hash_10_VER_ffae193111967ea874084aff6af78843',
+                  'hash_10_VER_fcd0bf815bb6aeb174801a9c28cec2fc',
+                  'hash_10_VER_25e5b195b489c12c550f0cab05cb73c5'
+               ],
+            },
+            {  item   => 'NETSTAT_close',
+               color  => 'CC333F',
+               task   => 'hash_09_VER_4398e443b77abf037f6cd07820d6a543',
+               type   => 'STACK',
+               hashes => [
+                  'hash_10_VER_8ec9b976bcbc93509f6823a5abef8286',
+                  'hash_10_VER_9855d9801d9d5f7eb1c8878a79f46f08',
+                  'hash_10_VER_5ce620ba7ae356228eb03d37cf50a2f9',
+                  'hash_10_VER_27e2115399d3b6ce9d0a06ec2e943b20'
+               ],
+            },
+            {  item   => 'NETSTAT_close_wait',
+               color  => '6A4A3C',
+               task   => 'hash_09_VER_53b1edfd7bdb0fb4f2c7f221eac98ba3',
+               type   => 'STACK',
+               hashes => [
+                  'hash_10_VER_eb361dec2f97b388059958612c63ecb6',
+                  'hash_10_VER_7d10fe03e1b36f86b17406459d014d11',
+                  'hash_10_VER_754f84bcbdb5e50acb6f760036b91c1a',
+                  'hash_10_VER_35added2015d0ce010150b575086f4d0'
+               ],
+            },
+            {  item   => 'NETSTAT_last_ack',
+               color  => '00A0B0',
+               task   => 'hash_09_VER_2f773645f5dffd81ee3c81f38c7f53fc',
+               type   => 'STACK',
+               hashes => [
+                  'hash_10_VER_7414656dfc2469c378b632c14a268898',
+                  'hash_10_VER_f5fe0170272d8cf03bbc1ed44811be9b',
+                  'hash_10_VER_93e55f7e21c75d4055417b16e7f4d97f',
+                  'hash_10_VER_6fd201e3865473080cc55882776de677'
+               ],
+            },
+            {  item   => 'NETSTAT_listen',
+               color  => '7A6A53',
+               task   => 'hash_09_VER_339abb917b2315fe9af91acd7b3369a8',
+               type   => 'STACK',
+               hashes => [
+                  'hash_10_VER_a207a812c2683547d96e701aa433b0f5',
+                  'hash_10_VER_42256c4aedd80dffe28100c661b2799d',
+                  'hash_10_VER_e73e5c668bfe8aab67c9f292a5f994d8',
+                  'hash_10_VER_19f11f9e18c3ce05982a27d489d0a808'
+               ],
+            },
+            {  item   => 'NETSTAT_closing',
+               color  => 'D5DED9',
+               task   => 'hash_09_VER_6ad27e766a970f6afbbe7eee77e08c34',
+               type   => 'STACK',
+               hashes => [
+                  'hash_10_VER_3dd68425fba544ed58d60bc55977fe3e',
+                  'hash_10_VER_bf2bdc19cd4f5ee15c5ba0c0a273a5f2',
+                  'hash_10_VER_4ddf0743ca7d8a9d3054087be96d90fe',
+                  'hash_10_VER_d435cf39a0d2e48aeb8f16124f11af77'
+               ],
+            },
+            {  item   => 'NETSTAT_unknown',
+               color  => '948C75',
+               task   => 'hash_09_VER_80bbcea6cd18da2451844b0ff10d982c',
+               type   => 'STACK',
+               hashes => [
+                  'hash_10_VER_41500e7e8944bf7bafc8ba2c31b57c66',
+                  'hash_10_VER_3252983da60cb6567ff806f12f082e21',
+                  'hash_10_VER_c39dd89998070fb020d57ad1877aa36d',
+                  'hash_10_VER_6501be3938db592d4e5ffbcd14f76343'
+               ],
+            },
+         ],
+      },
    ],
    inputs => {
       'Get W' => {
@@ -999,6 +1192,33 @@
             NETDEV_txfifo    => 'hash_07_VER_aa6cc86c6faf544e3626399429b9e151',
             NETDEV_txcolls   => 'hash_07_VER_1618e6d4a45b466f6db539e26ee26a7c',
             NETDEV_txcarrier => 'hash_07_VER_da5563ac95c3ef33bfc0c8227ab40559',
+         },
+      },
+      'Get Network Connection States' => {
+         type_id      => 1,
+         hash         => 'hash_03_VER_80df11dffbbb5a407c5d1c00b7a84a07',
+         input_string => '<path_php_binary> -q <path_cacti>/scripts/ss_get_by_ssh.php '
+                       . '--host <hostname> --type netstat --items <items> ',
+         prompt_title => 1,
+         inputs => [
+            {  allow_nulls => '',
+               hash        => 'hash_07_VER_1b254d50616547ea5988c37ffc11e3e9',
+               name        => 'hostname'
+            },
+         ],
+         outputs => {
+            NETSTAT_established => 'hash_07_VER_e547fe9318a32d68346a4507070ec037',
+            NETSTAT_syn_sent    => 'hash_07_VER_d0c8056d4387b451f71f8e5d2b1b1298',
+            NETSTAT_syn_recv    => 'hash_07_VER_4916ac67916648117eccbcfaf87e2c2c',
+            NETSTAT_fin_wait1   => 'hash_07_VER_32c53a056b896773dfacc0dbc392217e',
+            NETSTAT_fin_wait2   => 'hash_07_VER_d0879b30991343022a2d9de4aebc2a72',
+            NETSTAT_time_wait   => 'hash_07_VER_82dea7581720f8280ae74e48b613183f',
+            NETSTAT_close       => 'hash_07_VER_1be21a921879ce2ebc64834add6cd789',
+            NETSTAT_close_wait  => 'hash_07_VER_a9f937238e852eb94ebfea32f3ab1ac2',
+            NETSTAT_last_ack    => 'hash_07_VER_f10b35454aa92abe0937711694957367',
+            NETSTAT_listen      => 'hash_07_VER_8bf75137fc9f7adcef01edc05c56e950',
+            NETSTAT_closing     => 'hash_07_VER_bd4334b31fb3088f4d29346fd151a29f',
+            NETSTAT_unknown     => 'hash_07_VER_118005c656a7f3f46ae7516a45faeb52',
          },
       },
    },

@@ -521,4 +521,34 @@ is(
    'main(samples/netdev-001.txt)'
 );
 
+is_deeply(
+   netstat_parse( null, file_get_contents('samples/netstat-001.txt') ),
+   array(
+       'NETSTAT_established'   => '7',
+       'NETSTAT_syn_sent'      => '0',
+       'NETSTAT_syn_recv'      => '0',
+       'NETSTAT_fin_wait1'     => '1',
+       'NETSTAT_fin_wait2'     => '27',
+       'NETSTAT_time_wait'     => '6412',
+       'NETSTAT_close'         => '0',
+       'NETSTAT_close_wait'    => '0',
+       'NETSTAT_last_ack'      => '0',
+       'NETSTAT_listen'        => '11',
+       'NETSTAT_closing'       => '0',
+       'NETSTAT_unknown'       => '0',
+   ),
+   'samples/netstat-001.txt'
+);
+
+is(
+   ss_get_by_ssh( array(
+      'file'    => 'samples/netstat-001.txt',
+      'type'    => 'netstat',
+      'host'    => 'localhost',
+      'items'   => 'e9,ea,eb,ec,ed,ee,ef,eg,eh,ei,ej,ek',
+   )),
+   'e9:7 ea:0 eb:0 ec:1 ed:27 ee:6412 ef:0 eg:0 eh:0 ei:11 ej:0 ek:0',
+   'main(samples/netstat-001.txt)'
+);
+
 ?>
