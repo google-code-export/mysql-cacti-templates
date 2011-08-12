@@ -1374,7 +1374,7 @@ function df_cachefile ( $options ) {
 }
 
 function df_cmdline ( $options ) {
-   return "df -k";
+   return "df -k -P";
 }
 
 function netdev_parse ( $options, $output ) {

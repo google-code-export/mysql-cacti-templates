@@ -1,11 +1,10 @@
-Filesystem           1K-blocks      Used Available Use% Mounted on
-/dev/mapper/iceland-root
-                      73506040  56766408  13005720  82% /
-none                   1016572       328   1016244   1% /dev
-none                   1024308      1388   1022920   1% /dev/shm
-none                   1024308       116   1024192   1% /var/run
-none                   1024308         0   1024308   0% /var/lock
-none                   1024308         0   1024308   0% /lib/init/rw
-/dev/sda1               233191     47236    173514  22% /boot
-nfs:/data/public
-                     5768579424 3290167680 2185384736  61% /data/public
+Filesystem         1024-blocks      Used Available Capacity Mounted on
+/dev/sda6              2064208    887520   1071832      46% /
+tmpfs                  8160308         0   8160308       0% /dev/shm
+/dev/sda1               253871     49432    191332      21% /boot
+/dev/mapper/vg00-data  52701748  44171784   5852820      89% /data
+/dev/mapper/vg00-server   4128448    426876   3491860      11% /server
+/dev/sda7              1032088     44896    934764       5% /tmp
+/dev/sda3              4128448    759032   3159704      20% /usr
+/dev/sda5              4128448    324624   3594112       9% /var
+/dev/mapper/vg01-data1 141077368  90639264  50438104      65% /data1

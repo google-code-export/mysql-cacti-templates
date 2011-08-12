@@ -471,10 +471,10 @@ is(
 );
 
 is_deeply(
-   df_parse( array('volume' => '/dev/sda1'), file_get_contents('samples/df-002.txt') ),
+   df_parse( array('volume' => '/dev/mapper/vg00-server'), file_get_contents('samples/df-002.txt') ),
    array(
-      'DISKFREE_used'      => '48369664',
-      'DISKFREE_available' => '177678336',
+      'DISKFREE_used'      => '437121024',
+      'DISKFREE_available' => '3575664640',
    ),
    'samples/df-002.txt'
 );
@@ -485,9 +485,9 @@ is(
       'type'    => 'df',
       'host'    => 'localhost',
       'items'   => 'dw,dx',
-      'volume'  => '/dev/sda1',
+      'volume'  => '/dev/mapper/vg00-server',
    )),
-   'dw:48369664 dx:177678336',
+   'dw:437121024 dx:3575664640',
    'main(samples/df-002.txt)'
 );
 
