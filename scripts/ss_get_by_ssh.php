@@ -165,7 +165,7 @@ function validate_options($options) {
    debug($options);
    $opts = array('host', 'port', 'items', 'nocache', 'type', 'url', 'http-user',
                  'file', 'http-password', 'server', 'port2', 'use-ssh', 
-                 'device', 'volume');
+                 'device', 'volume', 'threadpool');
    # Required command-line options
    foreach ( array('host', 'items', 'type') as $option ) {
       if ( !isset($options[$option]) || !$options[$option] ) {
@@ -204,6 +204,7 @@ General options:
    --server          The server (DNS name or IP address) from which to fetch the
                      desired data after SSHing.  Default is 'localhost' for HTTP
                      stats and --host for memcached stats.
+   --threadpool      Name of ThreadPool in JMX (i.e. http-8080 or jk-8009)
    --type            One of apache, nginx, proc_stat, w, memory, memcached,
                      diskstats, openvz, redis, jmx, mongodb, df, netdev, netstat
                      (more are TODO)
@@ -429,6 +430,9 @@ function ss_get_by_ssh( $options ) {
       'JMX_non_heap_memory_max'          => 'd9',
       'JMX_open_file_descriptors'        => 'da',
       'JMX_max_file_descriptors'         => 'db',
+      'JMX_current_threads_busy'         => 'el',
+      'JMX_current_thread_count'         => 'em',
+      'JMX_max_threads'                  => 'en',
       # Stuff from mongodb
       'MONGODB_connected_clients'        => 'dc',
       'MONGODB_used_resident_memory'     => 'dd',
@@ -478,6 +482,9 @@ function ss_get_by_ssh( $options ) {
       'NETSTAT_listen'                   => 'ei',
       'NETSTAT_closing'                  => 'ej',
       'NETSTAT_unknown'                  => 'ek',
+      # used by 'JMX_current_threads_busy' => 'el',
+      # used by 'JMX_current_thread_count' => 'em',
+      # used by 'JMX_max_threads'          => 'en',
    );
 
    # Prepare and return the output.  The output we have right now is the whole
@@ -1262,6 +1269,9 @@ function jmx_parse ( $options, $output ) {
       'non_heap_memory_max',
       'open_file_descriptors',
       'max_file_descriptors',
+      'current_threads_busy',
+      'current_thread_count',
+      'max_threads',
    );
    foreach ( explode("\n", $output) as $line ) {
       $words = explode(':', $line);
@@ -1278,7 +1288,8 @@ function jmx_cachefile ( $options ) {
 
 function jmx_cmdline ( $options ) {
    $port = isset($options['port2']) ? "$options[port2]" : '9012';
-   return "ant -Djmx.server.port=$port -e -q -f jmx-monitor.xml";
+   $threadpool = isset($options['threadpool']) ? "$options[threadpool]" : 'http-8080';
+   return "ant -Djmx.server.port=$port -Djmx.catalina.threadpool.name=$threadpool -e -q -f jmx-monitor.xml";
 }
 
 # ============================================================================

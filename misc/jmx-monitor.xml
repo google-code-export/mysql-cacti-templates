@@ -47,6 +47,21 @@ limitations under the License.
 		    attribute="MaxFileDescriptorCount"
 		    resultproperty="MaxFileDescriptorCount"
 		    />
+            <jmx:get
+                    name="Catalina:type=ThreadPool,name=${jmx.catalina.threadpool.name}"
+                    attribute="currentThreadsBusy"
+                    resultproperty="currentThreadsBusy"
+                    />
+            <jmx:get
+                    name="Catalina:type=ThreadPool,name=${jmx.catalina.threadpool.name}"
+                    attribute="currentThreadCount"
+                    resultproperty="currentThreadCount"
+                    />
+            <jmx:get
+                    name="Catalina:type=ThreadPool,name=${jmx.catalina.threadpool.name}"
+                    attribute="maxThreads"
+                    resultproperty="maxThreads"
+                    />
 	<echo>heap_memory_used: ${HeapMemoryUsage.used}
 heap_memory_committed: ${HeapMemoryUsage.committed}
 heap_memory_max: ${HeapMemoryUsage.max}
@@ -55,6 +70,9 @@ non_heap_memory_committed: ${NonHeapMemoryUsage.committed}
 non_heap_memory_max: ${NonHeapMemoryUsage.max}
 open_file_descriptors: ${OpenFileDescriptorCount}
 max_file_descriptors: ${MaxFileDescriptorCount}
+current_threads_busy: ${currentThreadsBusy}
+current_thread_count: ${currentThreadCount}
+max_threads: ${maxThreads}
 </echo>
     </target>
  

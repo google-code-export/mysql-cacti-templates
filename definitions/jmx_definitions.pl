@@ -176,6 +176,61 @@
             },
          ],
       },
+      {  name       => 'JMX ThreadPool',
+         base_value => '1000',
+         hash       => 'hash_00_VER_8c2ec59bd22ecf2a530a21c6d4e918ca',
+         dt         => {
+            hash  => 'hash_01_VER_d6a840937346b3f3b5e33888ac842708',
+            input => 'ThreadPool',
+            JMX_max_threads => {
+               data_source_type_id => '1',
+               hash => 'hash_08_VER_7bc29aa177ac5efa0bddeebb363669db'
+            },
+            JMX_current_thread_count => {
+               data_source_type_id => '1',
+               hash => 'hash_08_VER_d4c21fa0fb69a169b6ce1a388a2a1553'
+            },
+            JMX_current_threads_busy => {
+               data_source_type_id => '1',
+               hash => 'hash_08_VER_c14fbc3af70e0a61e17e42174b7ebe16'
+            },
+         },
+         items => [
+            {  item   => 'JMX_max_threads',
+               color  => '4F7774',
+               task   => 'hash_02_VER_0e83f70bd10ce46004cd90b2b950d943',
+               type   => 'AREA',
+               hashes => [
+                  'hash_10_VER_c0a4b4f316075ea6be3bf7d806979987',
+                  'hash_10_VER_3a2c9c7258e1e6bfe46f6b8d235a3222',
+                  'hash_10_VER_9995590e807064aaea233d1d0ee1ad70',
+                  'hash_10_VER_e7d58f42e04cb561270b5df8957a1558'
+               ],
+            },
+            {  item   => 'JMX_current_thread_count',
+               color  => 'FFDB87',
+               task   => 'hash_02_VER_3be2d93854f4079a37f2cd9221b010df',
+               type   => 'AREA',
+               hashes => [
+                  'hash_10_VER_36a4ddfcaf4b8b857d495d396f190086',
+                  'hash_10_VER_bd5a1e016b70362a9b9cc43d71b92f84',
+                  'hash_10_VER_e41ee5172d438012858b13a9dfba6983',
+                  'hash_10_VER_683e1832280fd659b5f580087bafb07d'
+               ],
+            },
+            {  item   => 'JMX_current_threads_busy',
+               color  => '850707',
+               task   => 'hash_02_VER_049abbd379abec6dfedb6c108c5e370c',
+               type   => 'AREA',
+               hashes => [
+                  'hash_10_VER_79a2315acac9403c010277a169497ff7',
+                  'hash_10_VER_95af64bfd807a2b6e1d2eb3e7f126216',
+                  'hash_10_VER_c3f4daa800b92532f43899214de65e1b',
+                  'hash_10_VER_01de3f6927116fd2dbbf0a8fde685508'
+               ],
+            },
+         ],
+      },
    ],
    inputs => {
       'Heap Memory Usage' => {
@@ -237,6 +292,32 @@
                'hash_07_VER_c1c38e5ec6cb89b5cc3aa3d48f8e49b7',
             JMX_max_file_descriptors =>
                'hash_07_VER_d8f96bdd0f3950c50ff9776789274c81',
+         },
+      },
+      'ThreadPool' => {
+         type_id => 1,
+         hash    => 'hash_03_VER_81b20f10ae00cb284a49291ce83b3b58',
+         input_string =>
+            '<path_php_binary> -q <path_cacti>/scripts/ss_get_by_ssh.php '
+            . '--host <hostname> --type jmx --items <items>',
+         inputs => [
+            {  allow_nulls => '',
+               hash        => 'hash_07_VER_b04a547db314499fdc16534467196754',
+               name        => 'hostname'
+            },
+            {  allow_nulls => '',
+               hash        => 'hash_07_VER_50ae6f7bdd6bc35a4b9206dd23921783',
+               name        => 'threadpool',
+               override    => 1,
+            },
+         ],
+         outputs => {
+            JMX_current_threads_busy =>
+               'hash_07_VER_7bed075223c77eb1c767b8fdd8ae6c7a',
+            JMX_current_thread_count =>
+               'hash_07_VER_31f702762bd160ac48a9b4728e6c49ac',
+            JMX_max_threads =>
+               'hash_07_VER_b3bb6cf017b4cf7b6c2471c0c4750e2f',
          },
       },
    }

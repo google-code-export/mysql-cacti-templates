@@ -395,6 +395,9 @@ is_deeply(
       'JMX_non_heap_memory_max'       => '318767104',
       'JMX_open_file_descriptors'     => '60',
       'JMX_max_file_descriptors'      => '1024',
+      'JMX_current_threads_busy'      => '7',
+      'JMX_current_thread_count'      => '172',
+      'JMX_max_threads'               => '200',
    ),
    'samples/jmx-001.txt'
 );
@@ -405,10 +408,10 @@ is(
          'file'  => 'samples/jmx-001.txt',
          'type'  => 'jmx',
          'host'  => 'localhost',
-         'items' => 'd4,d5,d6,d7,d8,d9,da,db',
+         'items' => 'd4,d5,d6,d7,d8,d9,da,db,el,em,en',
       )
    ),
-   'd4:52685256 d5:205979648 d6:1864171520 d7:55160928 d8:61603840 d9:318767104 da:60 db:1024',
+   'd4:52685256 d5:205979648 d6:1864171520 d7:55160928 d8:61603840 d9:318767104 da:60 db:1024 el:7 em:172 en:200',
    'main(samples/jmx-001.txt)'
 );
 
