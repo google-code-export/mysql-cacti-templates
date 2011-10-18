@@ -5,6 +5,7 @@ Changes for templates:
   * Added Network graphs (issue 100).
   * Added netstat graph (issue 101).
   * Added JMX ThreadPool graph (issue 151).
+  * Added Swap usage graph (issue 98).
 
 2011-01-22: version 1.1.8
 

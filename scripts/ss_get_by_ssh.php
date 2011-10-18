@@ -206,8 +206,8 @@ General options:
                      stats and --host for memcached stats.
    --threadpool      Name of ThreadPool in JMX (i.e. http-8080 or jk-8009)
    --type            One of apache, nginx, proc_stat, w, memory, memcached,
-                     diskstats, openvz, redis, jmx, mongodb, df, netdev, netstat
-                     (more are TODO)
+                     diskstats, openvz, redis, jmx, mongodb, df, netdev, 
+                     netstat, vmstat (more are TODO)
    --url             The url, such as /server-status, where server status lives
    --use-ssh         Whether to connect via SSH to gather info (default yes).
    --http-user       The HTTP authentication user
@@ -485,6 +485,9 @@ function ss_get_by_ssh( $options ) {
       # used by 'JMX_current_threads_busy' => 'el',
       # used by 'JMX_current_thread_count' => 'em',
       # used by 'JMX_max_threads'          => 'en',
+      # Stuff from 'vmstat' (swap)
+      'VMSTAT_pswpin'                    => 'eo',
+      'VMSTAT_pswpout'                   => 'ep',
    );
 
    # Prepare and return the output.  The output we have right now is the whole
@@ -1456,6 +1459,27 @@ function netstat_cachefile ( $options ) {
 
 function netstat_cmdline ( $options ) {
    return "netstat -ant";
+}
+
+function vmstat_parse ( $options, $output ) {
+   $result = array();
+   $matches = array();
+
+   preg_match('/pswpin ([0-9]+)/', $output, $matches);
+   $result["VMSTAT_pswpin"] = $matches[1];
+
+   preg_match('/pswpout ([0-9]+)/', $output, $matches);
+   $result["VMSTAT_pswpout"] = $matches[1];
+
+   return $result;
+}
+
+function vmstat_cachefile ( $options ) {
+   return sanitize_filename($options, array('host'), 'vmstat');
+}
+
+function vmstat_cmdline ( $options ) {
+   return "cat /proc/vmstat";
 }
 
 ?>

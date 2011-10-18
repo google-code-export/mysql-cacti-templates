@@ -554,4 +554,24 @@ is(
    'main(samples/netstat-001.txt)'
 );
 
+is_deeply(
+   vmstat_parse( null, file_get_contents('samples/vmstat-001.txt') ),
+   array(
+      'VMSTAT_pswpin'  => '32',
+      'VMSTAT_pswpout' => '1274',
+   ),
+   'samples/vmstat-001.txt'
+);
+
+is(
+   ss_get_by_ssh( array(
+      'file'    => 'samples/vmstat-001.txt',
+      'type'    => 'vmstat',
+      'host'    => 'localhost',
+      'items'   => 'eo,ep',
+   )),
+   'eo:32 ep:1274',
+   'main(samples/vmstat-001.txt)'
+);
+
 ?>

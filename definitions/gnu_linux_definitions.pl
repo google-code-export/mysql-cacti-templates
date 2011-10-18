@@ -1023,6 +1023,48 @@
             },
          ],
       },
+      {  name       => 'Swap Usage',
+         base_value => '1000',
+         hash       => 'hash_00_VER_2a05785ec5da01188d308420cafb696c',
+         override   => { title => 1 },
+         dt         => {
+            hash       => 'hash_01_VER_02e4d2f4077945f09f823ff8fc8d2b22',
+            input      => 'Get Swap Usage',
+            VMSTAT_pswpin => {
+               data_source_type_id => '3',
+               hash => 'hash_08_VER_63ad4925c01be8608573d3b1ddf0e2bb',
+            },
+            VMSTAT_pswpout => {
+               data_source_type_id => '3',
+               hash => 'hash_08_VER_4f1b60712e8b0482384d05b14fdd6134',
+            },
+         },
+         items => [
+            {  item   => 'VMSTAT_pswpin',
+               color  => 'ECD078',
+               task   => 'hash_09_VER_3b9b419ce143be72a9ec4743bb4cac93',
+               type   => 'AREA',
+               hashes => [
+                  'hash_10_VER_e96855da2587378e7c23ddccaaec9596',
+                  'hash_10_VER_5e3370b5550f6c3422138f9dd2a7a4f2',
+                  'hash_10_VER_284c2093a8394a8f9ee1dcc9d794337e',
+                  'hash_10_VER_ff320963e095e6240bfd86d399af0c9a'
+               ],
+            },
+            {  item   => 'VMSTAT_pswpout',
+               color  => 'D95B43',
+               task   => 'hash_09_VER_0dcb4c7ebd29019dabfa25fbbc06de09',
+               type   => 'AREA',
+               cdef   => 'Negate',
+               hashes => [
+                  'hash_10_VER_bdc15a7d1e8f477f32185fcfd561ae79',
+                  'hash_10_VER_e511423ac04405ad3dac14ca652f1b63',
+                  'hash_10_VER_950c6cba17252ec9ab33a2ed94089485',
+                  'hash_10_VER_dc94d64b8040d4d27ae62aeeb8ae9f11'
+               ],
+            },
+         ],
+      },
    ],
    inputs => {
       'Get W' => {
@@ -1219,6 +1261,23 @@
             NETSTAT_listen      => 'hash_07_VER_8bf75137fc9f7adcef01edc05c56e950',
             NETSTAT_closing     => 'hash_07_VER_bd4334b31fb3088f4d29346fd151a29f',
             NETSTAT_unknown     => 'hash_07_VER_118005c656a7f3f46ae7516a45faeb52',
+         },
+      },
+      'Get Swap Usage' => {
+         type_id      => 1,
+         hash         => 'hash_03_VER_ced6600a3cb23f28298e6211b7c662b5',
+         input_string => '<path_php_binary> -q <path_cacti>/scripts/ss_get_by_ssh.php '
+                       . '--host <hostname> --type vmstat --items <items> ',
+         prompt_title => 1,
+         inputs => [
+            {  allow_nulls => '',
+               hash        => 'hash_07_VER_232dbdae786400f7f1e5431f722f6d82',
+               name        => 'hostname'
+            },
+         ],
+         outputs => {
+            VMSTAT_pswpin  => 'hash_07_VER_099beffe0c8315d2f8f55717f0be73d4',
+            VMSTAT_pswpout => 'hash_07_VER_50d9ffcfab2f6d658f25683df4eba7a1',
          },
       },
    },
